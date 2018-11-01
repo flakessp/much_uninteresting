@@ -12,8 +12,6 @@ import zolotoFooter from './Footer.vue';
 export default {
   components: {
     zolotoMenu,
-    zolotoProjects,
-    zolotoNews,
     zolotoFooter
   }
 }
