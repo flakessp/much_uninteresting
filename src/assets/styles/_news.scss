@@ -1,0 +1,25 @@
+
+// news
+
+.zoloto-news {
+    background: black;
+    color: white; 
+  }
+  
+  .zoloto-news-single {
+    font: 20px 'Aeroport-regular';
+    border-bottom: 1px solid #303030;
+    padding: 33px;
+    display: flex;
+    justify-content: space-between;
+
+  }
+  
+  .zoloto-news-header {
+    font: 40px/90px 'Zoloto-display';
+  }
+  
+  .news-single-date {
+    font: 15px 'Aeroport-regular';
+    align-self: center;
+  }

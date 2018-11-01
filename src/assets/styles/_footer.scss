@@ -1,0 +1,31 @@
+
+// zoloto-footer 
+
+.zoloto-footer {
+    padding: 33px;
+    padding-top: 120px;
+    padding-bottom: 30px;
+  
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .zoloto-footer-address {
+    font: 20px/25px 'Aeroport-regular';
+    display: inline-block;
+    margin-right: 50px;
+  }
+  .zoloto-footer-social {
+    font: 15px 'Aeroport-mono';
+    text-transform: uppercase;
+    align-self: flex-end;
+    ul {
+      display: flex;
+      li {
+        margin-right: 35px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }

@@ -1,0 +1,53 @@
+
+// zoloto-projects 
+
+.zoloto-projects {
+    padding: 33px;
+    padding-top: 25px;
+    position: relative;
+  }
+  
+  .zoloto-projects-header {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .zoloto-projects-title {
+    font: 45px "Zoloto-display";
+  }
+  
+  .zoloto-projects-images-nav {
+    font: 15px 'Aeroport-mono';
+    text-transform: uppercase;
+    letter-spacing: -0.45px;
+    color: #CBCBCB;
+    // position: absolute;
+    // right: 33px;
+    // top: 37px;
+    align-self: center;
+  }
+  .project-slide-container {
+    display: flex;
+    overflow-x: auto;
+    align-items: center;
+    margin-bottom: 70px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  
+  .project-slide {
+    margin-right:20px;
+    align-self: baseline;
+  
+    img {
+      height: 600px;
+      min-width: 860px;
+      max-width: 100%;
+    }
+  }
+  
+  .project-slide-title {
+    font: 20px/25px "Aeroport-regular";
+    margin-top: 30px;
+  }

@@ -1,0 +1,28 @@
+@mixin bb1 {
+    border-bottom: 1px solid black; 
+}
+
+@mixin fzd ($font-size) {
+    font: $font-size "Zoloto-display";
+}
+
+@mixin fam ($font-size) {
+    font: $font-size "Aeroport-mono";
+}
+
+@mixin far ($font-size) {
+    font: $font-size "Aeroport-regular";
+}
+
+@mixin black-box {
+    &:before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background: black;
+        position: absolute;
+        top: 50%;
+        left: -12px;
+        transform: translateY(-50%);
+      }
+}
