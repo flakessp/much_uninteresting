@@ -11,49 +11,52 @@
       <div class="projects-filter-column">
         <div class="filter-column-title">тип работ:</div>
         <ul>
-          <li>все</li>
-          <li>навигация</li>
-          <li>айдентика</li>
-          <li>концепция развития</li>
-          <li>стратегия</li>
-          <li>оформление пространств</li>
-          <li>сувениры</li>
-          <li>полиграфия</li>
-          <li>digital</li>
+            <li v-for="item in typeWork" :key="item">{{item}}</li>
         </ul>
       </div>
       <div class="projects-filter-column">
         <div class="filter-column-title">отрасль:</div>
         <ul>
-          <li>все</li>
-          <li>ритейл</li>
-          <li>fmcg</li>
-          <li>корпоративный брендинг</li>
-          <li>городская среда</li>
-          <li>культурные проекты</li>
-          <li>недвижимость</li>
+            <li v-for="item in typeBranch" :key="item">{{item}}</li>
         </ul>
       </div>
       <div class="projects-filter-hide">свернуть</div>
     </div>
     <div class="projects-gallery">
       <div class="project-card">
-        <div class="project-card-image"><img src="images/yQKWXW.tif-80.jpg" alt=""></div>
+        <div class="project-card-image"><img src="./assets/images/yQKWXW.tif-80.jpg" alt=""></div>
         <div class="project-card-title">Третьяковская галерея на крымском валу</div>
       </div>
       <div class="project-card">
-        <div class="project-card-image"><img src="images/yQKWXW.tif-80.jpg" alt=""></div>
+        <div class="project-card-image"><img src="./assets/images/yQKWXW.tif-80.jpg" alt=""></div>
         <div class="project-card-title">Третьяковская галерея на крымском валу</div>
       </div>
       <div class="project-card">
-        <div class="project-card-image"><img src="images/yQKWXW.tif-80.jpg" alt=""></div>
+        <div class="project-card-image"><img src="./assets/images/yQKWXW.tif-80.jpg" alt=""></div>
         <div class="project-card-title">Третьяковская галерея на крымском валу</div>
       </div>
       <div class="project-card">
-        <div class="project-card-image"><img src="images/yQKWXW.tif-80.jpg" alt=""></div>
+        <div class="project-card-image"><img src="./assets/images/yQKWXW.tif-80.jpg" alt=""></div>
         <div class="project-card-title">Третьяковская галерея на крымском валу</div>
       </div>
       <div class="projects-gallery-load-more">еще проекты</div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            typeWork: ['все','навигация','айдентика','концепция развития','стратегия','оформление пространств','сувениры','полиграфия','digital'],
+            typeBranch: ['все','ритейл','fmcg','корпоративный брендинг','городская среда','культурные проекты','недвижимость'],
+
+        }
+    }
+}
+    
+</script>
+
+<style>
+
+</style>

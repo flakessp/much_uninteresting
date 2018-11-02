@@ -1,4 +1,4 @@
-import Projects from './Projects.vue';
+import Projects from './Project-list.vue';
 import Home from './Home.vue'
 
 export const routes = [

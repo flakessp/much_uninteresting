@@ -1,13 +1,12 @@
 <template>
-    <div class="zoloto-header">
-        <div class="header-logo"></div>
-        <div class="header-menu-main-page header-menu-icon" @click="toggleMenu">Меню</div>
-        <div class="header-menu header-menu-main-page-closed" v-show="isMenuOpen">
-        <ul>
-            <li v-for="item in menu">{{item}}</li>
-        </ul>
-        </div>
-        <div class="header-about">ZOLOTOgroup – это междисциплинарная команда, работающая над различными проектами в сферах развития территории, брендинга, создания систем навигации и визуальной стратегии коммуникации брендов.</div>
+    <div class="zoloto-header" :class="{'menu-open':isMenuOpen, 'menu-closed': !isMenuOpen }">
+        <div class="header-logo" :style="logoStyles"></div>
+        <div class="header-menu-main-page header-menu-icon menu-button" @click="toggleMenu">{{menuLabel}}</div>
+        <transition name="fade">
+            <ul class="header-menu header-menu-main-page-closed" v-if="isMenuOpen">
+                <li v-for="item in menu" v-bind:key="item.title"><router-link :to="item.link">{{item.title}}</router-link></li>
+            </ul>
+        </transition>
     </div>
 </template>
 
@@ -15,14 +14,88 @@
     export default {
         data () {
             return {
-                menu: ['проекты', 'о нас', 'новости', 'контакты', 'en'],
-                isMenuOpen: false
+                menu: [
+                    { title: 'проекты', link: '/projects' },
+                    { title: 'о нас', link: '' },
+                    { title: 'новости', link: '' },
+                    { title: 'контакты', link: '' }],
+                isMenuOpen: false,
+                menuLabel: 'Меню',
+                logo: {
+                    // initial (closed)
+                    width: 47,
+                    height: 40.64
+                }
             }
         },
         methods: {
             toggleMenu: function() {
                 this.isMenuOpen = !this.isMenuOpen;
+                if (this.isMenuOpen) {
+                    // open
+                    this.menuLabel = 'Закрыть'
+                    this.logo = {
+                        width: 788,
+                        height: 710,
+                    }
+                } else {
+                    // closed
+                    this.menuLabel = 'Меню'
+                    this.logo = {
+                        width: 47,
+                        height: 40.65,
+                    }
+                }
+            }
+        },
+        computed: {
+            logoStyles(){
+                return {
+                    width: this.logo.width + 'px',
+                    height: this.logo.height + 'px'
+                }
             }
         }
     }
 </script>
+
+<style scoped>
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    ul {
+        align-self: flex-end;
+    }
+    ul li {
+        font: 40px/.875  "Zoloto-display";
+    }
+    .menu-button {
+        cursor: pointer;
+        user-select: none;
+    }
+    .menu-open {
+        padding: 33px;
+    }
+    .menu-closed {
+        padding: 10px 33px;
+    }
+    .header-logo {
+        transition: all .7s linear;
+        will-change: auto;
+    }
+
+    /* animation */
+    .fade-enter {
+        opacity:0;
+    }
+    .fade-enter-active {
+        transition: opacity .7s linear;
+    }
+    .fade-leave-active {
+        transition: opacity .5s;
+        opacity: 0;
+    }
+</style>
+
+
