@@ -20,7 +20,7 @@
         </transition>
       <div class="projects-list-row">
         <div class="projects-filter-view-type">
-            <!-- оптимизировать в компонент -->
+            <!-- выбор отображения оптимизировать в компонент -->
           <div class="view-type-single" :class="{active: viewTypeSelected == 'плитка'}" @click="viewTypeSelected='плитка'">плитка</div>
           <div class="view-type-single" :class="{active: viewTypeSelected == 'список'}" @click="viewTypeSelected='список'">список</div>
         </div>
@@ -29,18 +29,32 @@
         
     </div>
     <div class="projects-gallery-wrapper">
-        <div class="projects-gallery">
+            <!-- отображение плиткой -->
+        <div class="projects-gallery" v-if="viewTypeSelected == 'плитка'">
             <div class="project-card" v-for="item in projects" :key="item.title">
                 <div class="project-card-image"><img :src="item.img" alt=""></div>
                 <div class="project-card-title">{{item.title}}</div>
             </div>
         </div>
+            <!-- отображение списком -->
+        <div class="projects-gallery-row" v-else >
+            <div class="project-card" v-for="item in projects" :key="item.title"   @mouseenter="drawHoveredImg(item.img)" 
+                @mouseleave="destroyHoveredImg" 
+                @mousemove="moveHoveredImg">
+                <!-- <div class="project-card-image"><img :src="item.img" alt=""></div> -->
+                <div class="project-card-title">{{item.title}}</div>
+                
+            </div>
+        </div>
       <div class="projects-gallery-load-more" @click="moreProjects">еще проекты</div>
     </div>
+<div class="img-hover-container"></div>
   </div>
+  
 </template>
 
 <script>
+import projects from './data/projects.js'
 export default {
     // done 1. у списков типов есть селектед по двум категориям которые отображют проекты и вещают на себя класс актив
     // 2. есть тип отображения список/плитка
@@ -55,34 +69,15 @@ export default {
         return {
             typeWork: [{title:'все',selected:true},{title:'навигация',selected:false},{title:'айдентика', selected:false},{title:'концепция развития',selected:false},{title:'стратегия',selected:false},{title:'оформление пространств',selected:false},{title:'сувениры',selected:false},{title:'полиграфия',selected:false},{title:'digital',selected:false}],
             typeBranch: [{title:'все',selected:true},{title:'ритейл',selected:false},{title:'fmcg',selected:false},{title:'корпоративный брендинг',selected:false},{title:'городская среда',selected:false},{title:'культурные проекты',selected:false},{title:'недвижимость',selected:false}],
-            projects: [{
-                img: require('./assets/images/yQKWXW.tif-80.jpg'),
-                title: 'Третьяковская галерея на крымском валу',
-                link: '',
-                type: ''
-            },{
-                img: require('./assets/images/yQKWXW.tif-80.jpg'),
-                title: 'Третьяковская галерея на крымском валу',
-                link: '',
-                type: ''
-            },{
-                img: require('./assets/images/yQKWXW.tif-80.jpg'),
-                title: 'Третьяковская галерея на крымском валу',
-                link: '',
-                type: ''
-            },{
-                img: require('./assets/images/yQKWXW.tif-80.jpg'),
-                title: 'Третьяковская галерея на крымском валу',
-                link: '',
-                type: ''
-            }],
+            projects,
             viewTypeSelected: 'плитка',
             selectedTypes: ['все'],
             isFilterOpen: true,
             filterLabel: 'Свернуть',
+            displayHoveredImage: false
         }
     }, methods: {
-        moreProjects(){
+        moreProjects () {
             this.projects.push({
                 img: require('./assets/images/yQKWXW.tif-80.jpg'),
                 title: 'Третьяковская галерея на крымском валу',
@@ -94,7 +89,7 @@ export default {
 
             if (type == 'все' && item.selected == true) {
                 return;
-            }else if ( type == 'все' ) {
+            } else if ( type == 'все' ) {
                 obj.forEach(function( element,index ) {
                     // пройтись по всему массиву и выключить остальные выбранные в фильтре
                     if ( index == 0 ) return;
@@ -104,6 +99,8 @@ export default {
                 obj[0].selected = false;
             }
             item.selected = !item.selected;
+            // отправить в массив выбранных selectedTypes
+            this.selectedTypes.push(item.title);
         }, toggleFilter: function() {
                 this.isFilterOpen = !this.isFilterOpen;
                 if (this.isFilterOpen) {
@@ -111,11 +108,35 @@ export default {
                 } else {
                     this.filterLabel = 'Фильтр'
                 }
-            }
+        }, moveHoveredImg() {
+            // передалать использую vue
+            this.imgContainer.style.left  = (event.clientX + 40) + 'px';
+            this.imgContainer.style.top = (event.clientY - 73) + 'px';
+
+        }, drawHoveredImg(imgSrc) {
+            this.imgContainer = document.querySelector('.img-hover-container');
+            this.img = document.createElement('img');
+            this.img.setAttribute('src', imgSrc);
+            this.imgContainer.appendChild(this.img);
+        }, destroyHoveredImg() {
+            this.img.parentNode.removeChild(this.img);
+        }
     }, computed: {
         postsToShow() {
             // возвращает массив на основе выбранных типов
-            return [];
+            if (this.selectedTypes == 'все') {
+                return this.projects;
+            }
+            
+            const posts = [];
+            // для каждого объекта в массиве медиа
+            this.mediaList.forEach((item) => {
+            if(!this.posts.includes(item.type)) {
+                // если объекта с таким типом нет в массиве -> добавить его в новый массив
+                posts.push(item.type);
+            }
+            });
+            return posts;
         }
     }
 }
@@ -131,10 +152,15 @@ export default {
         color: #C89F6E;
     }
 
+    .projects-gallery-load-more {
+        margin-bottom: 25px;
+    }
+
     /* оптимиировать стили */
 
     .projects-filter {
-        display: block;
+        display: flex;
+        flex-flow: column;
     }
 
     .projects-filter-column-titled {
@@ -168,7 +194,7 @@ export default {
         transform: translateY(-50%);
     }
     .projects-gallery-wrapper {
-        padding: 25px 33px;
+        padding: 0;
         border-bottom: 1px solid black;
     }
 
@@ -177,10 +203,31 @@ export default {
         opacity:0;
     }
     .fade-enter-active {
-        transition: opacity 1s linear;
+        transition: all 1s linear;
     }
     .fade-leave-active {
-        transition: opacity .5s;
+        transition: all .5s;
         opacity: 0;
+    }
+    .projects-gallery-row {
+        flex-flow: column;
+    }
+    .projects-gallery-row .project-card {
+        padding: 25px 33px;
+        border-bottom: 1px solid black;
+        margin-top: 0;
+    }
+    .projects-gallery-row .project-card:last-of-type{
+        border-bottom: none;
+    }
+    .projects-gallery-row .project-card-title {
+        margin-top: 0;
+    }
+    .img-hover-container {
+        position: absolute;
+        width: 218px;
+        height: 145px;
+        z-index: 1;
+        overflow: hidden;
     }
 </style>
