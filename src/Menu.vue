@@ -90,7 +90,7 @@
         opacity:0;
     }
     .fade-enter-active {
-        transition: opacity .7s linear;
+        transition: opacity 1s linear;
     }
     .fade-leave-active {
         transition: opacity .5s;

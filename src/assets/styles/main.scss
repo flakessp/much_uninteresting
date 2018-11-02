@@ -41,7 +41,8 @@
 .projects-filter {
   display: flex;
   flex-flow: wrap;
-  padding: $p5;
+  padding: 25px 33px;
+  padding-bottom: 15px;
   justify-content: space-between;
   text-transform: uppercase;
   position: relative;
@@ -51,7 +52,10 @@
 .projects-filter-column {
   @include fam(15px);
   line-height: 35px;
-  margin-left: 60px;
+  &:last-of-type {
+    margin-left: 150px;
+    margin-right: 75px;
+  }
 }
 .projects-filter-column-titled {
   display: flex;
@@ -62,7 +66,7 @@
 }
 
 .filter-column-title {
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 .projects-filter-title {
@@ -75,25 +79,18 @@
   
 }
 
-.view-type-single {
-  font-size: 17px;
-  position: relative;
-  margin-right: 25px;
-  &.active {
-    @include black-box;
-  }
-}
 .projects-filter-hide {
   @include fam(15px);
   line-height: 35px;
-  position: absolute;
-  right: 25px;
-  bottom: 25px;
+  // position: absolute;
+  // right: 25px;
+  // bottom: 25px;
 }
 
 .projects-filter-view-type {
   display: flex;
-  margin-left: 13px;
+  padding-left: 15px;
+  // margin-left: 13px;
 }
 
 
@@ -104,8 +101,8 @@
   display: flex;
   justify-content: space-between;
   flex-flow: wrap;
-  padding: $p5;
-  @include bb1;
+  // padding: $p5;
+  // @include bb1;
 }
 
 .project-card {
@@ -136,6 +133,7 @@
   text-transform: uppercase;
   flex-grow: 2;
   text-align: center;
+  // margin-bottom: 25px;
 }
 
 // project-page
