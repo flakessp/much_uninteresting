@@ -1,4 +1,4 @@
-const projects = [{
+export const projects = [{
     img: require('../assets/images/yQKWXW.tif-80.jpg'),
     title: 'Iconic awards 2017',
     link: '',
@@ -18,6 +18,4 @@ const projects = [{
     title: 'Департамент образования города москвы — создание системы ориентирования',
     link: '',
     type: 'стратегия'
-}]
-
-export default projects
+}];

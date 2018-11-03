@@ -4,7 +4,7 @@
       <h1 class="zoloto-news-header">новости</h1>
       <div class="zoloto-news-link-all">все</div>
     </div>
-    <div class="zoloto-news-single" v-for="item in news">
+    <div class="zoloto-news-single" v-for="item in news" :key="item">
       <div class="news-single-title">{{item.title}}</div>
       <div class="news-single-date">{{item.date}}</div>
     </div>
