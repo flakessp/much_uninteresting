@@ -94,7 +94,6 @@
 
   .projects-gallery-wrapper {
     padding: 0;
-    border-bottom: 1px solid black;
   }
 
   /* объединить стили анимации с меню  */

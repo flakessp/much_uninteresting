@@ -1,20 +1,21 @@
 <template>
   <!-- отображение плиткой -->
   <div class="projects-gallery">
-    <div class="project-card" v-for="item in postsToShow" :key="item.title">
-      <div class="project-card-image"><img :src="item.img" alt=""></div>
-      <div class="project-card-title">{{item.title}}</div>
-    </div>
+    <project-card v-for="item in postsToShow" :key="item.title" :title="item.title" :img="item.img"></project-card>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+  import ProjectCard from './ProjectCard.vue';
   export default {
+    components: {
+      ProjectCard
+    },
     computed: {
       ...mapGetters([
         'postsToShow'
       ])
-    },
+    }, 
   }
 </script>

@@ -1,6 +1,8 @@
 <template>
     <div class="zoloto-header" :class="{'menu-open':isMenuOpen, 'menu-closed': !isMenuOpen }">
-        <div class="header-logo" :style="logoStyles"></div>
+        <router-link to="/">
+            <div class="header-logo" :style="logoStyles"></div>
+        </router-link>
         <div class="header-menu-main-page header-menu-icon menu-button" @click="toggleMenu">{{menuLabel}}</div>
         <transition name="fade">
             <ul class="header-menu header-menu-main-page-closed" v-if="isMenuOpen">
@@ -16,9 +18,9 @@
             return {
                 menu: [
                     { title: 'проекты', link: '/projects' },
-                    { title: 'о нас', link: '' },
-                    { title: 'новости', link: '' },
-                    { title: 'контакты', link: '' }],
+                    { title: 'о нас', link: '/about' },
+                    { title: 'новости', link: '/news' },
+                    { title: 'контакты', link: '/contacts' }],
                 isMenuOpen: false,
                 menuLabel: 'Меню',
                 logo: {

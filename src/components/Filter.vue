@@ -1,18 +1,18 @@
 <template>
   <div class="projects-filter">
     <transition name="fade">
-      <div class="projects-filter-column projects-filter-column-titled" v-if="isFilterOpen">
+      <div class="projects-filter-column projects-filter-column-titled" v-show="isFilterOpen">
         <div class="projects-filter-title">Проекты</div>
         <div class="projects-filter-column">
           <div class="filter-column-title">тип работ:</div>
           <ul>
-            <li v-for="item in workTypes" :key="item.title" :class="{'is-type-selected':item.selected}" @click="selectType(item, typeWork)">{{item.title}}</li>
+            <li v-for="item in workTypes" :key="item.title" :class="{'is-type-selected':item.selected}" @click="selectWorkType(item)">{{item.title}}</li>
           </ul>
         </div>
         <div class="projects-filter-column">
           <div class="filter-column-title">отрасль:</div>
           <ul>
-            <li v-for="item in branchTypes" :key="item.title" :class="{'is-type-selected':item.selected}" @click="selectType(item, typeBranch)">{{item.title}}</li>
+            <li v-for="item in branchTypes" :key="item.title" :class="{'is-type-selected':item.selected}" >{{item.title}}</li>
           </ul>
         </div>
       </div>
@@ -32,7 +32,7 @@
   import { mapGetters, mapMutations, mapState } from 'vuex';
 
   export default {
-    
+
     props: {
          changeViewType: {
             type: Function
@@ -44,13 +44,14 @@
     data() {
       return {
         isFilterOpen: true,
-        filterLabel: 'Свернуть'
+        filterLabel: 'Свернуть',
+        elHeight: 0,
       }
     },
 
     methods: {
       ...mapMutations([
-        'selectType'
+        'selectWorkType'
       ]),
       toggleFilter: function () {
         this.isFilterOpen = !this.isFilterOpen;
@@ -72,6 +73,8 @@
   .projects-filter {
     display: flex;
     flex-flow: column;
+    overflow: hidden;
+    transition: all 1s ease-in-out;
   }
 
   .projects-filter-column-titled {

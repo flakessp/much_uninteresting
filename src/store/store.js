@@ -18,8 +18,9 @@ export const store = new Vuex.Store({
     getters: {
         postsToShow(state) {
             const posts = [];
+
     
-            state.typeBranch.forEach(function (type) {
+            state.typeWork.forEach(function (type) {
               if (type.title == "все" && type.selected) {
                 posts.push(...state.projects);
               } else if (type.selected) {
@@ -40,17 +41,18 @@ export const store = new Vuex.Store({
         })
       },
 
-      selectType(state, item, obj) {
+      selectWorkType(state, item) {
         const type = item.title;
+        console.log(item);
         if (type == 'все' && item.selected == true) {
           return;
         } else if (type == 'все') {
-          obj.forEach(function (element, index) {
+          state.typeWork.forEach(function (element, index) {
             if (index == 0) return;
             element.selected = false;
           });
         } else {
-          obj[0].selected = false;
+          state.typeWork[0].selected = false;
         }
         item.selected = !item.selected;
       },

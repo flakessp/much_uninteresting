@@ -1,7 +1,9 @@
 <template>
     <div>
       <zoloto-menu></zoloto-menu>
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
       <zoloto-footer></zoloto-footer>
       </div>
 </template>
