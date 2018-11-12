@@ -19,7 +19,6 @@ export const store = new Vuex.Store({
         postsToShow(state) {
             const posts = [];
 
-    
             state.typeWork.forEach(function (type) {
               if (type.title == "все" && type.selected) {
                 posts.push(...state.projects);
