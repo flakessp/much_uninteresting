@@ -128,12 +128,4 @@
     margin-top: 0;
   }
 
-  .img-hover-container {
-    position: absolute;
-    width: 218px;
-    height: 145px;
-    z-index: 1;
-    overflow: hidden;
-  }
-
 </style>
