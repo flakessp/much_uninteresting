@@ -14,6 +14,10 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+router.afterEach((from,to) => {
+  store.commit('toggleMenu');
+})
+
 new Vue({
   el: '#app',
   router,

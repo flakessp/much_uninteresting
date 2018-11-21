@@ -1,6 +1,7 @@
 <template>
     <div>
       <zoloto-menu></zoloto-menu>
+      <zoloto-menu-opened v-show="isMenuOpen"></zoloto-menu-opened>
       <transition name="fade">
         <router-view></router-view>
       </transition>
@@ -9,12 +10,23 @@
 </template>
 
 <script>
-import zolotoMenu from './Menu.vue';
-import zolotoFooter from './Footer.vue';
+
+// TODO: перенести логику меню в отдельный компонент с названием хедер
+
+import zolotoMenu from './components/Header.vue'
+import zolotoFooter from './Footer.vue'
+import zolotoMenuOpened from './components/HeaderMenuOpen'
+
 export default {
   components: {
     zolotoMenu,
-    zolotoFooter
+    zolotoFooter,
+    zolotoMenuOpened
+  },
+  computed: {
+    isMenuOpen () {
+        return this.$store.state.menu.isOpen
+    }
   }
 }
 </script>

@@ -13,7 +13,12 @@ export const store = new Vuex.Store({
     state: {
         projects,
         typeBranch,
-        typeWork
+        typeWork,
+        isMenuOpen: false,
+        menu: {
+          isOpen: false,
+          label: 'Меню'
+        }
     },
     getters: {
         postsToShow(state) {
@@ -38,6 +43,11 @@ export const store = new Vuex.Store({
           link: '',
           type: ''
         })
+      },
+
+      toggleMenu(state) {
+        state.menu.isOpen = !state.menu.isOpen;
+        state.menu.isOpen ? state.menu.label = 'Закрыть' : state.menu.label = 'Меню';
       },
 
       selectWorkType(state, item) {
